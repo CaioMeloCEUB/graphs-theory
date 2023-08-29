@@ -39,8 +39,29 @@ class Graph:
         for node in self.nodes:
             if node.get_rate() != n - 1:
                 return False
-
         return True
+    
+    '''
+    esse depth search é a busca em profundidade que pelo o que eu pesquisei é um algoritmo para caminhar no grafo; 
+    Definição:
+    - Seu núcleo se concentra em buscar, sempre que possível, o mais fundo no grafo. As arestas são exploradas a partir do vértice v mais recentemente descoberto que ainda possui arestas não exploradas saindo dele. 
+    
+    Eu vi que fazer uma função recursiva era uma boa opção
+    Basicamente ele vai caminhando nos vizinhos e salvando eles, se no final os visitados forem iguais a todos os nodes do grafo significa que ele andou por todos os nós e, consequentemente, é conexo.
+    '''
+    def depth_search(self, node, visited:set):
+        visited.add(node)
+        for neighbor in node.get_relations():
+            if neighbor not in visited:
+                self.depth_search(neighbor, visited)
+
+    def is_connected(self):
+        visited = set()
+        # nó start
+        start_node = next(iter(self.nodes))
+        self.depth_search(start_node, visited)
+        # Retorna True se todos os nós foram visitados, False caso contrário
+        return len(visited) == len(self.nodes)
 
 
 if __name__ == "__main__":
@@ -100,19 +121,23 @@ if __name__ == "__main__":
     graph_complete.create_relation(rodrigo, leonardo, "pai de")
     graph_complete.create_relation(rodrigo, camila, "pai de")
 
-    #graph.display_graph()
-
     # Exercício 1: O grau de um determinado vértice;
-    #print(rodrigo.get_rate())
-    #print(f'O grau do vértice {leonardo.name} é de {leonardo.get_rate()}\n')
-    
-    
+    print(rodrigo.get_rate())
+    print(f'O grau do vértice {leonardo.name} é de {leonardo.get_rate()}')
+    print()
+
     # Exercício 2: A vizinhança de um determinado vértice;
-    #jair.get_neighborhood()
+    jair.get_neighborhood()
+    print()
 
     # Exercício 3: A verificação booleana se o Grafo é completo;
     print(graph.is_complete())
     print(graph_complete.is_complete())
+    print()
 
+    # Exercício 4: A verificação booleana se o Grafo é conexo.
+    print(graph.is_connected())
+    print(graph_complete.is_connected())
+    print()
 
 
