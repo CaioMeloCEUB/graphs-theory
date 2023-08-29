@@ -1,7 +1,7 @@
 package Av02;
+
 import java.util.*;
-import Av02.Edge;
- 
+
 public class Node {
     int id;
     String name;
@@ -13,7 +13,11 @@ public class Node {
         edges = new ArrayList<>();
     }
 
-    /*public void addEdge(Node arrival, int weight) {
+    public void addEdge(Node arrival, int weight) {
         edges.add(new Edge(arrival, weight));
-    }*/
+    }
+
+    public String getName() {
+        return name;
+    }
 }
