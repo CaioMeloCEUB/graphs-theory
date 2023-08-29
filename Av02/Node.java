@@ -13,7 +13,7 @@ public class Node {
         edges = new ArrayList<>();
     }
 
-    public void addEdge(Node arrival, int weight) {
+    /*public void addEdge(Node arrival, int weight) {
         edges.add(new Edge(arrival, weight));
-    }
+    }*/
 }
