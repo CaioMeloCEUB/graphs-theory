@@ -12,7 +12,7 @@ public class Main {
         Edge e2 = new Edge(n1,n3,0.1);
         Edge e3 = new Edge(n1,n4,450);
         Edge e4 = new Edge(n3,n4,0.2);
-        Edge e5 = new Edge(n3,n5,-3);
+        //Edge e5 = new Edge(n3,n5,-3);
         //Edge e6 = new Edge(n2,n4,0);
 
         Graph g = new Graph();
