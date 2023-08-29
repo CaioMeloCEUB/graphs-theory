@@ -1,32 +1,11 @@
-list_graph=[]
+X=("nome universidade: ", get_univname)
+Y=
 
-class Graph():
-    def __init__
+list=[[X, Y] ,[Y] , [X]]
 
-class Node(Graph):
-    def __init__(self, degree, neighbor):
-        self.degree=degree
-        self.neighbor=neighbor
-
-    def get_degree(self):
-        return self.degree
-
-    def get_neighbor(self):
-        return self.neighbor
-
-for Graph in list_graph:
-    if Graph != []:
-        pass
-    else: 
-        print("error")
+Edge= list
 
 
-class Nodesub(Node):
-    def __init__(self, degree, name):
-        super().__init__(degree)
-        self.name=name 
 
-class Edge():
-    def __init__(self, node1, node2):
-        self.node1=node1
-        self.node2=node2
+class Graph ():
+    def __init__(self, ):
