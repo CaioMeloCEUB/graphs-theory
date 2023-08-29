@@ -1,30 +1,33 @@
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 public class Graph {
-
     private List<Node> nodes;
-    private Set<Edge> edges;
 
+    public void printNodes() {
 
-    public Graph() {
-        this.nodes = new ArrayList<Node>();
-        this.edges = new HashSet<Edge>();
-    }
-
-    public void addNode(Node n) {
-        this.nodes.add(n);
-    }
-
-    public void addEdge(Edge e) {
-        this.edges.add(e);
-    }
-
-    public void printGraph() {
-        for(Edge e: this.edges) {
-            e.print();
+        for (Node e : nodes) {
+            System.out.println(e.getName());
+            for (Node j : e.getNeighbours().keySet()) {
+                System.out.printf("n" + j.getName() + " ");
+            }
+            System.out.println("\n");
         }
+
+    }
+
+    public List<Node> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(List<Node> nodes) {
+        this.nodes = nodes;
+    }
+
+    @Override
+    public String toString() {
+        return "Graph{" +
+                "nodes=" + nodes +
+                '}';
     }
 }
