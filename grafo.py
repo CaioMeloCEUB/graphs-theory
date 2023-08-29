@@ -63,6 +63,12 @@ class Graph:
         # Retorna True se todos os nós foram visitados, False caso contrário
         return len(visited) == len(self.nodes)
 
+    def path_circuit(self, vertices_list):
+        if len(vertices_list) < 2:
+            # se tiver um vértice, não é nem caminho nem circuito
+            return
+        #não deu tempo de acabar
+
 
 if __name__ == "__main__":
     taube = Node("Taube")
@@ -122,7 +128,6 @@ if __name__ == "__main__":
     graph_complete.create_relation(rodrigo, camila, "pai de")
 
     # Exercício 1: O grau de um determinado vértice;
-    print(rodrigo.get_rate())
     print(f'O grau do vértice {leonardo.name} é de {leonardo.get_rate()}')
     print()
 
@@ -140,4 +145,5 @@ if __name__ == "__main__":
     print(graph_complete.is_connected())
     print()
 
-
+    # Exercício 5: Fornecido um conjunto de vértices indicar se os mesmos representam um caminho, um circuito ou as duas possibilidades.
+    # falta acabar
