@@ -1,11 +1,50 @@
-X=("nome universidade: ", get_univname)
-Y=
+list=[]
 
-list=[[X, Y] ,[Y] , [X]]
+class Universidade():
+    def __init__(self, univname, cidade, degree):
+        self.univname=univname
+        self.cidade=cidade
+        self.degree=degree
+    def get_univname(self):
+        return self.univname
+    def get_cidade(self):
+        return self.cidade
+    def get_degree(self):
+        return self.degree
+    
+    if __name__=='__main__':
+        searchuniv=str(input("aperte '9' para prosseguir."))
+        X=Universidade(f"nome universidade: ", {get_univname()})
 
-Edge= list
+    for Universidade in list:
+        if searchuniv == 9:
+            print(X)
+            pass
+        else:
+            print(searchuniv)
+            
 
+class Datacenter():
+    def __init__(self, cidade, degree):
+        self.cidade=cidade
+        self.degree=degree
+    def get_cidadedata(self):
+        return self.cidade
+    def get_degreedata(self):
+    
+class Datacenter1(Datacenter):
+    def __init__(self, cidade, degree):
+        super().__init__(cidade, degree)
+    
 
+    
+    
+   
+    Y=(f"nome datacenter1: ", {get_dataname1()})
+    Z=(f"nome datacenter2: ", {get_dataname2()})
+
+   
+    
 
 class Graph ():
-    def __init__(self, ):
+    def __init__(self, ):'''
