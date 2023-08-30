@@ -16,12 +16,12 @@ class Universidade():
         searchuniv=str(input("aperte '9' para prosseguir."))
         X=Universidade(f"nome universidade: ", {get_univname()})
 
-    for Universidade in list:
-        if searchuniv == 9:
-            print(X)
-            pass
-        else:
-            print(searchuniv)
+        for Universidade in list:
+            if searchuniv == 9:
+                print(X)
+                pass
+            else:
+                print(searchuniv)
             
 
 class Datacenter():
@@ -31,20 +31,46 @@ class Datacenter():
     def get_cidadedata(self):
         return self.cidade
     def get_degreedata(self):
+        return self.degree
     
 class Datacenter1(Datacenter):
-    def __init__(self, cidade, degree):
+    def __init__(self, cidade, degree, dataname):
         super().__init__(cidade, degree)
+        self.dataname=dataname
+    def get_dataname1(self):
+        return self.dataname
+    
+    if __name__=='__main__':
+        searchdata=str(input("aperte '1' para prosseguir."))
+        Y=Datacenter(f"nome datacenter1: ", {get_dataname1()})
+
+        for Datacenter in list:
+            if searchdata == 1:
+                print(Y)
+                pass
+            else:
+                print(searchdata)
+    
+class Datacenter2(Datacenter):
+    def __init__(self, cidade, degree, dataname):
+        super().__init__(cidade, degree)
+        self.dataname=dataname
+    def get_dataname2(self):
+        return self.dataname
+    
+    if __name__=='__main__':
+        searchdata2=str(input("aperte '2' para prosseguir."))
+        Z=Datacenter(f"nome datacenter2: ", {get_dataname2()})
+
+        for Datacenter in list:
+            if searchdata2 == 2:
+                print(Z)
+                pass
+            else:
+                print(searchdata2)
     
 
     
     
    
-    Y=(f"nome datacenter1: ", {get_dataname1()})
-    Z=(f"nome datacenter2: ", {get_dataname2()})
 
-   
-    
-
-class Graph ():
-    def __init__(self, ):'''
