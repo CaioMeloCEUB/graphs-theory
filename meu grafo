@@ -1,4 +1,4 @@
-list=[]
+Graph=[]
 
 class Universidade():
     def __init__(self, univname, cidade, degree):
@@ -14,15 +14,15 @@ class Universidade():
     
     if __name__=='__main__':
         searchuniv=str(input("aperte '9' para prosseguir."))
-        X=Universidade(f"nome universidade: ", {get_univname()})
+        X= Universidade(f"nome universidade: ", {get_univname()})
 
-        for Universidade in list:
+        for Universidade in Graph:
             if searchuniv == 9:
                 print(X)
                 pass
             else:
                 print(searchuniv)
-            
+        
 
 class Datacenter():
     def __init__(self, cidade, degree):
@@ -44,7 +44,7 @@ class Datacenter1(Datacenter):
         searchdata=str(input("aperte '1' para prosseguir."))
         Y=Datacenter(f"nome datacenter1: ", {get_dataname1()})
 
-        for Datacenter in list:
+        for Datacenter in Graph:
             if searchdata == 1:
                 print(Y)
                 pass
@@ -62,7 +62,7 @@ class Datacenter2(Datacenter):
         searchdata2=str(input("aperte '2' para prosseguir."))
         Z=Datacenter(f"nome datacenter2: ", {get_dataname2()})
 
-        for Datacenter in list:
+        for Datacenter in Graph:
             if searchdata2 == 2:
                 print(Z)
                 pass
