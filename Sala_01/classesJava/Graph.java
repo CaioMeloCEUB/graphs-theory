@@ -6,6 +6,7 @@ public class Graph {
     private String name;
     private List<Node> vertexes;
     private int numVertexes;
+    private int numEdges;
     private int[][] adjMatrix;
     
     public Graph(String n, List<Node> list) {
@@ -26,9 +27,22 @@ public class Graph {
         this.adjMatrix[end][origin] = 1;
     }
 
+    public void setNumEdges() {
+        int n = 0;
+        for (int i = 0; i < this.numVertexes; i++) {
+            for (int j = 0; j < this.numVertexes; j++) {
+                if(this.adjMatrix[i][j] == 1) {
+                    n++;
+                }
+            }
+        }
+        this.numEdges = n/2;
+    }
+
     public void printGraph() {
         System.out.println("Grafo: " + this.name + "\n");
         System.out.println("Vértices: \n");
+        this.setNumEdges();
         for (Node n: this.vertexes) {
             List<Node> adjacents = n.getAdjacents();
             System.out.print("Nome: " + n.getName() + " | Número na matriz: " + n.getAdjMatrixNum() + " | Grau: " + n.nodeDegree());
@@ -38,7 +52,8 @@ public class Graph {
             }
             System.out.print("\n\n");
         }
-        System.out.println("Total de vértices: " + this.numVertexes + "\n");
+        System.out.println("Total de vértices: " + this.numVertexes);
+        System.out.println("Total de arestas: " + this.numEdges + "\n");
     }
 
     public void printMatrix() {
