@@ -12,6 +12,7 @@ public class Graph {
             nodes.add(new Node(i, "Node " + i));
         }
     }
+
     public void addEdge(int origin, int arrival, int weight) {
         Node nodeOrigin = nodes.get(origin);
         Node nodeArrival = nodes.get(arrival);
