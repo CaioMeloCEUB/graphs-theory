@@ -53,16 +53,98 @@ public class Main {
         nos.add(dc11);
         nos.add(dc12);
 
-        Graph grafo = new Graph("Grafo dos Data Centers", nos);
-        grafo.printGraph();
-        
-        for(int i = 0; i < 13; i++) {
+        for(Node n: nos){
+            if(n.getName() != dc0.getName()) {
+                adjn0.add(n);
+            }
+
+        }
+        dc0.setAdjacents(adjn0);
+        for(Node n: nos){
+            if(n.getName() != dc1.getName()) {
+                adjn1.add(n);
+            }
+        }
+        dc1.setAdjacents(adjn1);
+        for(Node n: nos){
+            if(n.getName() != dc2.getName()) {
+                adjn2.add(n);
+            }
+        }
+        dc2.setAdjacents(adjn2);
+        for(Node n: nos){
+            if(n.getName() != dc3.getName()) {
+                adjn3.add(n);
+            }
+        }
+        dc3.setAdjacents(adjn3);
+        for(Node n: nos){
+            if(n.getName() != dc4.getName()) {
+                adjn4.add(n);
+            }
+        }
+        dc4.setAdjacents(adjn4);
+        for(Node n: nos){
+            if(n.getName() != dc5.getName()) {
+                adjn5.add(n);
+            }
+        }
+        dc5.setAdjacents(adjn5);
+        for(Node n: nos){
+            if(n.getName() != dc6.getName()) {
+                adjn6.add(n);
+            }
+        }
+        dc6.setAdjacents(adjn6);
+        for(Node n: nos){
+            if(n.getName() != dc7.getName()) {
+                adjn7.add(n);
+            }
+        }
+        dc7.setAdjacents(adjn7);
+        for(Node n: nos){
+            if(n.getName() != dc8.getName()) {
+                adjn8.add(n);
+            }
+        }
+        dc8.setAdjacents(adjn8);
+        for(Node n: nos){
+            if(n.getName() != dc9.getName()) {
+                adjn9.add(n);
+            }
+        }
+        dc9.setAdjacents(adjn9);
+        for(Node n: nos){
+            if(n.getName() != dc10.getName()) {
+                adjn10.add(n);
+            }
+        }
+        dc10.setAdjacents(adjn10);
+        for(Node n: nos){
+            if(n.getName() != dc11.getName()) {
+                adjn11.add(n);
+            }
+        }
+        dc11.setAdjacents(adjn11);
+        for(Node n: nos){
+            if(n.getName() != dc12.getName()) {
+                adjn12.add(n);
+            }
             
         }
+        dc12.setAdjacents(adjn12);
 
-        grafo.addEdge(0, 1);
-        grafo.addEdge(1, 0);
+        Graph grafo = new Graph("Grafo dos Data Centers", nos);
+        
+        for(int i = 0; i < 13; i++) {
+            for(int j = 0; j < 13; j++){
+                if(i != j){
+                    grafo.addEdge(i, j);
+                }
+            }
+        }
 
+        grafo.printGraph();
         grafo.printMatrix();
     }
 }

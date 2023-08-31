@@ -31,7 +31,7 @@ public class Graph {
         System.out.println("Vértices: \n");
         for (Node n: this.vertexes) {
             List<Node> adjacents = n.getAdjacents();
-            System.out.print("Nome: " + n.getName() + " | Número na matriz: " + n.getAdjMatrixNum());
+            System.out.print("Nome: " + n.getName() + " | Número na matriz: " + n.getAdjMatrixNum() + " | Grau: " + n.nodeDegree());
             System.out.print(" | Adjacentes: ");
             for (Node o: adjacents) {
                 System.out.print(o.getName() + ", ");

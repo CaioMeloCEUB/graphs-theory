@@ -47,8 +47,8 @@ public class Node {
 
     // O grau de um determinado vértice
 
-    public void nodeDegree() {
-        System.out.println(this.adjacents.size());
+    public int nodeDegree() {
+        return this.adjacents.size();
     }
 
     // A vizinhança de um determinado vértice
