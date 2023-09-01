@@ -39,6 +39,10 @@ public class Graph {
         this.numEdges = n/2;
     }
 
+    public void isConnected() {
+        
+    }
+
     public void printGraph() {
         System.out.println("Grafo: " + this.name + "\n");
         System.out.println("Vértices: \n");
@@ -65,7 +69,5 @@ public class Graph {
             System.out.println();
         }
         System.out.println();
-    }
-
-    
+    }    
 }
