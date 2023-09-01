@@ -1,5 +1,4 @@
 package classesJava;
-import classesJava.Node;
 import java.util.List;
 
 public class Graph {
@@ -39,8 +38,27 @@ public class Graph {
         this.numEdges = n/2;
     }
 
-    public void isConnected() {
-        
+    // 3 - A verificação booleana se o grafo é conexo
+    // Método utilizado: Busca em Profundidade (DFS - Depth-First Search)
+
+    public void DFS(Node n) {
+        n.setVisited();
+        List<Node> neighbours = n.getAdjacents();
+        for (Node o: neighbours){
+            if (o.getVisited() == false) {
+                DFS(o);
+            }
+        }
+    }
+
+    public boolean isConnected() {
+        DFS(this.vertexes.get(0));
+        for(Node n: this.vertexes) {
+            if(!n.getVisited()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void printGraph() {
@@ -58,6 +76,11 @@ public class Graph {
         }
         System.out.println("Total de vértices: " + this.numVertexes);
         System.out.println("Total de arestas: " + this.numEdges + "\n");
+        if (this.isConnected() == true) {
+            System.out.println("O grafo é conexo\n");
+        } else {
+            System.out.println("O grafo é desconexo\n");
+        }
     }
 
     public void printMatrix() {

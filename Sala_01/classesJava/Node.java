@@ -6,14 +6,17 @@ public class Node {
     private String name;
     private int adjMatrixNum;
     private List<Node> adjacents;
+    private boolean visited;
 
     public Node(String n, List<Node> list) {
         this.name = n;
         this.adjacents = list;
+        this.visited = false;
     }
 
     public Node(String n) {
         this.name = n;
+        this.visited = false;
     }
 
     public String getName() {
@@ -26,6 +29,10 @@ public class Node {
 
     public int getAdjMatrixNum() {
         return this.adjMatrixNum;
+    }
+
+    public boolean getVisited() {
+        return this.visited;
     }
 
     public void setName(String n) {
@@ -45,13 +52,17 @@ public class Node {
         this.adjacents.add(n);
     }
 
-    // O grau de um determinado vértice
+    public void setVisited() {
+        this.visited = true;
+    }
+
+    // 1 - O grau de um determinado vértice
 
     public int nodeDegree() {
         return this.adjacents.size();
     }
 
-    // A vizinhança de um determinado vértice
+    // 2 - A vizinhança de um determinado vértice
 
     public void neighbours() {
         for (Node n: this.adjacents) {
