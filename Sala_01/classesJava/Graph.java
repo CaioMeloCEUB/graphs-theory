@@ -60,6 +60,17 @@ public class Graph {
         }
         return true;
     }
+    
+    // 4 - A verificação booleana se o grafo é completo
+
+    public boolean isComplete() {
+        for (Node n: this.vertexes) {
+            if (n.nodeDegree() != this.vertexes.size() - 1) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public void printGraph() {
         System.out.println("Grafo: " + this.name + "\n");
@@ -80,6 +91,11 @@ public class Graph {
             System.out.println("O grafo é conexo\n");
         } else {
             System.out.println("O grafo é desconexo\n");
+        }
+        if (this.isComplete() == true) {
+            System.out.println("O grafo é completo\n");
+        } else {
+            System.out.println("O grafo é incompleto\n");
         }
     }
 
