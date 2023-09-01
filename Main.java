@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 public class Main {
-    
+
     public static void main(String[] args) {
 
 //        Node n1 = new Node("CEUB");
@@ -101,17 +101,17 @@ public class Main {
         matrix1.addNode(node4);
         matrix1.addNode(node5);
 
-            for (Node node : matrix1.getNodes()) {
+        for (Node node : matrix1.getNodes()) {
+            if (node.getConnectedTo() != null) {
                 node.getConnectedTo().forEach((connected, teste) -> {
                     System.out.print(connected.getName());
                     System.out.print(teste);
                 });
             }
-
-
-
         }
 
 
 
+
     }
+}
