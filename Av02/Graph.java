@@ -18,6 +18,5 @@ public class Graph {
         Node nodeArrival = nodes.get(arrival);
         nodeOrigin.addEdge(nodeArrival, weight);
         nodeArrival.addEdge(nodeOrigin, weight);
-
     }
 }

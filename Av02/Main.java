@@ -16,5 +16,12 @@ public class Main {
         graph.addEdge(1, 3, 7);
 
         PrintGraph.print(graph);
+
+        boolean connected = ConnectedGraph.checkConnected(graph);
+        if (connected) {
+            System.out.println("The graph is connected\n");
+        } else {
+            System.out.println("The graph is not connected\n");
+        }
     }
 }
