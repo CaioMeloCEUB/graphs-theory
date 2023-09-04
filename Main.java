@@ -71,27 +71,40 @@ public class Main {
         Node node4 = new Node("4");
         Node node5 = new Node("5");
         HashMap<Node, Double> hashMap1 = new HashMap<>();
-        hashMap1.put(node2, 88.0);
-        hashMap1.put(node3, 88.0);
-        hashMap1.put(node4, 88.0);
-        hashMap1.put(node5, 88.0);
+        hashMap1.put(node2, 8.0);
+        hashMap1.put(node3, 8.0);
+        hashMap1.put(node4, 8.0);
+        hashMap1.put(node5, 8.0);
         node1.setConnectedTo(hashMap1);
 
 
         HashMap<Node, Double> hashMap2 = new HashMap<>();
+        hashMap2.put(node1, 8.0);
         hashMap2.put(node3, 4.0);
         hashMap2.put(node4, 4.0);
         hashMap2.put(node5, 4.0);
         node2.setConnectedTo(hashMap2);
 
         HashMap<Node, Double> hashMap3 = new HashMap<>();
+        hashMap3.put(node1, 8.0);
+        hashMap3.put(node2, 4.0);
         hashMap3.put(node4, 5.0);
         hashMap3.put(node5, 5.0);
         node3.setConnectedTo(hashMap3);
 
         HashMap<Node, Double> hashMap4 = new HashMap<>();
+        hashMap4.put(node1, 8.0);
+        hashMap4.put(node2, 4.0);
+        hashMap4.put(node3, 5.0);
         hashMap4.put(node5, 6.0);
         node4.setConnectedTo(hashMap4);
+
+        HashMap<Node, Double> hashMap5 = new HashMap<>();
+        hashMap5.put(node1, 8.0);
+        hashMap5.put(node2, 4.0);
+        hashMap5.put(node3, 5.0);
+        hashMap5.put(node4, 6.0);
+        node5.setConnectedTo(hashMap5);
 
         Matrix matrix1 = new Matrix();
 
@@ -101,17 +114,14 @@ public class Main {
         matrix1.addNode(node4);
         matrix1.addNode(node5);
 
-        for (Node node : matrix1.getNodes()) {
-            if (node.getConnectedTo() != null) {
-                node.getConnectedTo().forEach((connected, teste) -> {
-                    System.out.print(connected.getName());
-                    System.out.print(teste);
-                });
-            }
-        }
+        System.out.println(matrix1);
 
+        System.out.println("Grau do node 1: " + matrix1.getDegree(node1));
 
+        System.out.println("É uma matriz completa: " + matrix1.isCompleteGraph());
 
+        System.out.println("Tem ciclo: " + matrix1.hasCycle());
 
+        System.out.println(matrix1.toAdjacencyMatrix());
     }
 }

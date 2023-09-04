@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Set;
 
 public class Node {
 
@@ -27,4 +28,14 @@ public class Node {
     public void setConnectedTo(HashMap<Node, Double> connectedTo) {
         this.connectedTo = connectedTo;
     }
+
+    public int getDegree() {
+        return connectedTo.size();
+    }
+
+    public Set<Node> getNeighbors() {
+        return connectedTo.keySet();
+    }
+
+
 }
