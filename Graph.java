@@ -24,8 +24,8 @@ public class Graph {
         this.nodes = nodes;
     }
 
-    public Boolean isComplete(){
-        if(((nodes.size()*(nodes.size()-1))/2) != nodes.size()-1){
+    public Boolean isComplete() {
+        if (((nodes.size() * (nodes.size() - 1)) / 2) != nodes.size() - 1) {
             System.out.println("Não é Completo");
             return Boolean.FALSE;
         } else {
@@ -33,30 +33,30 @@ public class Graph {
             return Boolean.TRUE;
         }
     }
-    public void isAssociated(){
-        /*
-        Basicamente, para saber se é conexo, é preciso fazer uma comparação entre as listas de neighbours,
-        se você conseguir chegar em qualquer vertice atraves de outro o grafo é conexo, então atraves dos vertices
-        vizinhos, se voce conseguir chegar em qualquer vertice do grafo o mesmo é conexo, caso contrário, não é.
-        */
 
+    public boolean isAssociated() {
+        for (Node e : nodes) {
+            if (e.getNeighbours() == null)
+                return false;
+        }
+        return true;
     }
 
-    public void checkPath(Node v1, Node v2){
+    public void checkPath(Node v1, Node v2) {
         /*
             Circuito: Repete o primeiro e ultimo vertice, mas não repete nenhum outro.
             Caminho: Passeio sem vertices repetidos.
         */
-        List <String> passeio = new ArrayList<String>();
+        List<String> passeio = new ArrayList<String>();
         passeio.add(v1.getName());
         int contador = 0;
-        while(passeio.get(contador) != v2.getName()){
-            for(Node x : v1.getNeighbours().keySet()){
-                if(x.getName() == v2.getName()){
+        while (passeio.get(contador) != v2.getName()) {
+            for (Node x : v1.getNeighbours().keySet()) {
+                if (x.getName() == v2.getName()) {
                     passeio.add(x.getName());
                     System.out.println(passeio);
-                }else{
-                    for(Node y : x.getNeighbours().keySet()){
+                } else {
+                    for (Node y : x.getNeighbours().keySet()) {
 
                     }
                 }

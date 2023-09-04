@@ -75,7 +75,7 @@ public class Main {
         graph.printNodes();
 
         // A verificação booleana se o Grafo é conexo;
-
+        System.out.println(graph.isAssociated());
 
         // A verificação booleana se o Grafo é completo.
         graph.isComplete();
