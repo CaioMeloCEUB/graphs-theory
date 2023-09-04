@@ -56,6 +56,10 @@ public class Node {
         this.visited = true;
     }
 
+    public void setVisitedFalse() {
+        this.visited = false;
+    }
+
     // 1 - O grau de um determinado vértice
 
     public int nodeDegree() {
