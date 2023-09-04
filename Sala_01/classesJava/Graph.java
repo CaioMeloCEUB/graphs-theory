@@ -72,6 +72,40 @@ public class Graph {
         return true;
     }
 
+    // 5 - Fornecido um conjunto de vértices indicar se os mesmos representam um caminho, um circuito ou as duas possibilidades.
+
+    // 5.1 - Checar se é caminho
+
+    public boolean isPath(List<Node> list) {
+        for (Node n: list) {
+            if (!this.vertexes.contains(n)) {
+                return false;
+            }
+        }
+        DFS (list.get(0));
+        for (Node n: list) {
+            if (!n.getVisited()) {
+                return false;
+            }
+        }
+        return true;
+        
+    }
+
+    // 5.2 - Checar se é circuito
+
+    public boolean isCircuit(List<Node> list) {
+        if (list.get(0) != list.get(list.size() - 1)) {
+            return false;
+        }
+        boolean f = isPath(list);
+        if (!f) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public void printGraph() {
         System.out.println("Grafo: " + this.name + "\n");
         System.out.println("Vértices: \n");
