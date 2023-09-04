@@ -23,6 +23,14 @@ public class Main {
         Node dc11 = new Node("Data Center 11");
         Node dc12 = new Node("Data Center 12");
 
+        // Bonus Round: três novos data centers
+
+        Node dc13 = new Node("Data Center 13");
+        Node dc14 = new Node("Data Center 14");
+        Node dc15 = new Node("Data Center 15");
+
+        //
+
         List<Node> adjn0 = new ArrayList<Node>();
         List<Node> adjn1 = new ArrayList<Node>();
         List<Node> adjn2 = new ArrayList<Node>();
@@ -36,7 +44,14 @@ public class Main {
         List<Node> adjn10 = new ArrayList<Node>();
         List<Node> adjn11 = new ArrayList<Node>();
         List<Node> adjn12 = new ArrayList<Node>();
-        
+
+        // Bonus Round: três novos data centers
+
+        List<Node> adjn13 = new ArrayList<Node>();
+        List<Node> adjn14 = new ArrayList<Node>();
+        List<Node> adjn15 = new ArrayList<Node>();
+
+        //
 
         List<Node> nos = new ArrayList<Node>();
         nos.add(dc0);
@@ -52,6 +67,14 @@ public class Main {
         nos.add(dc10);
         nos.add(dc11);
         nos.add(dc12);
+
+        // Bonus Round: três novos data centers
+
+        nos.add(dc13);
+        nos.add(dc14);
+        nos.add(dc15);
+
+        //
 
         for(Node n: nos){
             if(n.getName() != dc0.getName()) {
@@ -129,15 +152,37 @@ public class Main {
         for(Node n: nos){
             if(n.getName() != dc12.getName()) {
                 adjn12.add(n);
-            }
-            
+            } 
         }
         dc12.setAdjacents(adjn12);
 
+        // Bonus Round: três novos data centers
+
+        for(Node n: nos){
+            if(n.getName() != dc13.getName()) {
+                adjn13.add(n);
+            }
+        }
+        dc13.setAdjacents(adjn13);
+        for(Node n: nos){
+            if(n.getName() != dc14.getName()) {
+                adjn14.add(n);
+            }
+        }
+        dc14.setAdjacents(adjn14);
+        for(Node n: nos){
+            if(n.getName() != dc15.getName()) {
+                adjn15.add(n);
+            } 
+        }
+        dc15.setAdjacents(adjn15);
+
+        //
+
         Graph grafo = new Graph("Grafo dos Data Centers", nos);
         
-        for(int i = 0; i < 13; i++) {
-            for(int j = 0; j < 13; j++){
+        for(int i = 0; i < 16; i++) {
+            for(int j = 0; j < 16; j++){
                 if(i != j){
                     grafo.addEdge(i, j);
                 }
@@ -146,5 +191,16 @@ public class Main {
 
         grafo.printGraph();
         grafo.printMatrix();
+
+        /* List<Node> caminhoTrue = new ArrayList<Node>();
+        caminhoTrue.add(dc0);
+        caminhoTrue.add(dc1);
+        List<Node> caminhoFalse = new ArrayList<Node>();
+        caminhoTrue.add(dc0);
+        caminhoTrue.add(dc2);
+        List<Node> circuitoTrue = new ArrayList<Node>();
+
+        System.out.println("Teste das funções de caminho e circuito");
+        System.out.println("Teste das funções de caminho e circuito"); */
     }
 }

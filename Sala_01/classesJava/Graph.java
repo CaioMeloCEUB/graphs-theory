@@ -74,6 +74,16 @@ public class Graph {
 
     // 5 - Fornecido um conjunto de vértices indicar se os mesmos representam um caminho, um circuito ou as duas possibilidades.
 
+    public void DFSPath(List<Node> list) {
+        list.get(0).setVisited();
+        List<Node> neighbours = list.get(0).getAdjacents();
+        for (Node o: neighbours){
+            if (o.getVisited() == false && list.contains(o)) {
+                DFS(o);
+            }
+        }
+    }
+
     // 5.1 - Checar se é caminho
 
     public boolean isPath(List<Node> list) {
@@ -82,7 +92,7 @@ public class Graph {
                 return false;
             }
         }
-        DFS (list.get(0));
+        DFSPath (list);
         for (Node n: list) {
             if (!n.getVisited()) {
                 return false;
@@ -95,7 +105,7 @@ public class Graph {
     // 5.2 - Checar se é circuito
 
     public boolean isCircuit(List<Node> list) {
-        if (list.get(0) != list.get(list.size() - 1)) {
+        if (list.get(0) != list.get(list.size() - 1) || !list.get(list.size() - 2).getAdjacents().contains(list.get(list.size() - 1)) ) {
             return false;
         }
         boolean f = isPath(list);
@@ -104,6 +114,35 @@ public class Graph {
         } else {
             return true;
         }
+    }
+
+    public void resetVisited() {
+        for (Node o: this.vertexes) {
+                o.setVisitedFalse();
+        }
+    }
+    // Bonus round
+    // O grafo complementar dessa rede é um grafo com apenas 1 aresta.
+    // // Método que retorna o número de arestas do grafo complementar
+
+    public int edgesComp() {
+        int totalPossibleEdges = (this.numVertexes * (this.numVertexes - 1)) / 2;
+        return totalPossibleEdges - this.numEdges;
+    }
+
+    // O grafo que representa a rede de data centers pode ser classificado como Euleriano.
+    // // Um grafo G é Euleriano se e somente se G for conexo e cada vértice de M tem grau par
+
+    public boolean isEulerian() {
+        for (Node n: vertexes) {
+            if (n.nodeDegree() % 2 != 0) {
+                return false;
+            }
+        }
+        if (!this.isConnected()) {
+            return false;
+        }
+        return true;
     }
 
     public void printGraph() {
@@ -130,6 +169,12 @@ public class Graph {
             System.out.println("O grafo é completo\n");
         } else {
             System.out.println("O grafo é incompleto\n");
+        }
+        System.out.println("Número de arestas do grafo complementar: " + this.edgesComp() + "\n");
+        if (this.isEulerian() == true) {
+            System.out.println("O grafo é euleriano\n");
+        } else {
+            System.out.println("O grafo não é euleriano\n");
         }
     }
 
