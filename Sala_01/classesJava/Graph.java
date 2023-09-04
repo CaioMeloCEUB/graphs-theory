@@ -74,6 +74,16 @@ public class Graph {
 
     // 5 - Fornecido um conjunto de vértices indicar se os mesmos representam um caminho, um circuito ou as duas possibilidades.
 
+    public void DFSPath(List<Node> list) {
+        list.get(0).setVisited();
+        List<Node> neighbours = list.get(0).getAdjacents();
+        for (Node o: neighbours){
+            if (o.getVisited() == false && list.contains(o)) {
+                DFS(o);
+            }
+        }
+    }
+
     // 5.1 - Checar se é caminho
 
     public boolean isPath(List<Node> list) {
@@ -82,7 +92,7 @@ public class Graph {
                 return false;
             }
         }
-        DFS (list.get(0));
+        DFSPath (list);
         for (Node n: list) {
             if (!n.getVisited()) {
                 return false;
@@ -104,6 +114,10 @@ public class Graph {
         } else {
             return true;
         }
+    }
+
+    public void resetVisited() {
+        
     }
 
     public void printGraph() {
