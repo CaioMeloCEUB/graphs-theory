@@ -2,11 +2,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Node {
-
     private String name;
     private HashMap<Node, Double> neighbours;
-
-
 
     public Node(String name) {
         this.name = name;
@@ -36,7 +33,6 @@ public class Node {
     public int findDegree(){
         return this.neighbours.size();
     }
-
 
 
     @Override
