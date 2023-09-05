@@ -59,14 +59,21 @@ class Graph:
 graph = Graph()
 
 # Adicionar nós
-graph.add_node(Node("A"))
-graph.add_node(Node("B"))
-graph.add_node(Node("C"))
+graph.add_node(Node("Mario"))
+graph.add_node(Node("Acorn Plains"))
+graph.add_node(Node("Sparkling Waters"))
+graph.add_node(Node("Frosted Glacier"))
+graph.add_node(Node("Layer Cake Desert"))
+graph.add_node(Node("Princesa"))
 
 # Adicionar arestas
-graph.add_edge("A", "B", 5)
-graph.add_edge("B", "C", 3)
-graph.add_edge("A", "C", 2)
+graph.add_edge("Mario", "Acorn Plain", 20)
+graph.add_edge("Mario", "Sparkling Waters", 30)
+graph.add_edge("Acorn Plain", "Mario", 10)
+graph.add_edge("Mario","Layer Cake Desert" , 300)
+graph.add_edge("Acorn Plain", "Layer Cake Desert", 5)
+graph.add_edge("Layer Cake Desert", "Peincesa", 5)
+
 
 # Imprimir informações do grafo
 graph.print_graph()
