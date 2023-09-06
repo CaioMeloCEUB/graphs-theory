@@ -1,6 +1,4 @@
 import heapq
-import cv2
-import numpy as np
 
 class Graph:
     def __init__(self):
@@ -44,54 +42,63 @@ class Graph:
 
         return path
 
-# Create a function to visualize the graph and shortest path
-def visualize_graph(graph, shortest_path):
-    img = np.zeros((600, 600, 4), dtype=np.uint8)
+    def optimized_path(self, start, end):
+        acorn_plains_to_layer_cake_desert_weight = float('inf')
+        acorn_plains_to_layer_cake_desert_node = None
+
+        for (neighbor, weight) in self.graph["Acorn Plains"]:
+            if neighbor == "Layer Cake Desert" and weight < acorn_plains_to_layer_cake_desert_weight:
+                acorn_plains_to_layer_cake_desert_weight = weight
+                acorn_plains_to_layer_cake_desert_node = neighbor
+
+        if not acorn_plains_to_layer_cake_desert_node:
+            return None
+
+        path_part1 = self.dijkstra(start, acorn_plains_to_layer_cake_desert_node)
+        path_part2 = self.dijkstra(acorn_plains_to_layer_cake_desert_node, end)[1:]
+
+        optimized_path = path_part1 + path_part2
+
+        return optimized_path
+
+    def get_path_details(self, path):
+        if not path:
+            return "Caminho não encontrado."
+
+        total_distance = 0
+        path_details = []
+
+        for i in range(len(path) - 1):
+            node1 = path[i]
+            node2 = path[i + 1]
+            for (neighbor, weight) in self.graph[node1]:
+                if neighbor == node2:
+                    total_distance += weight
+                    path_details.append(f"Ir de {node1} para {node2} (Distancia: {weight})")
+
+        return path_details, total_distance
     
-    # Draw nodes
-    node_positions = {}
-    for i, node in enumerate(graph.graph.keys()):
-        x = 50 + i * 100
-        y = 200
-        node_positions[node] = (x, y)
-        cv2.circle(img, (x, y), 20, (255, 255, 255), -1)
-        cv2.putText(img, node, (x - 15, y + 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
-
-    # Draw edges
-    for node, neighbors in graph.graph.items():
-        for neighbor, weight in neighbors:
-            start_pos = node_positions[node]
-            end_pos = node_positions[neighbor]
-            cv2.line(img, start_pos, end_pos, (255, 255, 255), 2)
-
-    # Highlight the shortest path
-    if shortest_path:
-        for i in range(len(shortest_path) - 1):
-            start_pos = node_positions[shortest_path[i]]
-            end_pos = node_positions[shortest_path[i + 1]]
-            cv2.line(img, start_pos, end_pos, (0, 0, 255), 2)
-
-    cv2.imshow('Graph Visualization', img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
 # Exemplo de uso:
 graph = Graph()
 
 graph.add_edge("Mario", "Acorn Plains", 20)
 graph.add_edge("Mario", "Sparkling Waters", 30)
+graph.add_edge("Mario", "Layer Cake Desert", 20)
 graph.add_edge("Acorn Plains", "Sparkling Waters", 10)
-graph.add_edge("Mario", "Layer Cake Desert", 300)
-graph.add_edge("Acorn Plains", "Layer Cake Desert", 5)
-graph.add_edge("Layer Cake Desert", "Princesa", 5)
+graph.add_edge("Acorn Plains", "Layer Cake Desert", 15)
+graph.add_edge("Layer Cake Desert", "Princesa", 50)
+graph.add_edge("Sparkling Waters","Princesa", 180)
 
 start_node = "Mario"
 end_node = "Princesa"
 
-shortest_path = graph.dijkstra(start_node, end_node)
+optimized_shortest_path = graph.optimized_path(start_node, end_node)
 
-if shortest_path:
-    print("Menor caminho de", start_node, "para", end_node, ":", shortest_path)
-    visualize_graph(graph, shortest_path)
+if optimized_shortest_path:
+    print("Caminho otimizado de", start_node, "para", end_node, ":")
+    path_details, total_distance = graph.get_path_details(optimized_shortest_path)
+    for detail in path_details:
+        print(detail)
+    print("Distancia total:", total_distance)
 else:
     print("Não há caminho de", start_node, "para", end_node)

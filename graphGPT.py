@@ -48,9 +48,10 @@ graph = Graph()
 graph.add_edge("Mario", "Acorn Plains", 20)
 graph.add_edge("Mario", "Sparkling Waters", 30)
 graph.add_edge("Acorn Plains", "Sparkling Waters", 10)
-graph.add_edge("Mario", "Layer Cake Desert", 300)
+graph.add_edge("Mario", "Layer Cake Desert", 100)
 graph.add_edge("Acorn Plains", "Layer Cake Desert", 5)
-graph.add_edge("Layer Cake Desert", "Princesa", 5)
+graph.add_edge("Layer Cake Desert", "Acorn Plains", 5)
+graph.add_edge("Acorn Plains", "Princesa", 190)
 
 start_node = "Mario"
 end_node = "Princesa"
