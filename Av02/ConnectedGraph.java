@@ -24,7 +24,6 @@ public class ConnectedGraph {
                 if (!passedNode.contains(arrivalNode)) {
                     passedNode.add(arrivalNode);
                     queue.add(arrivalNode);
-
                 }
             }
         }
