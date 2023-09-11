@@ -81,13 +81,21 @@ class Graph:
 # Exemplo de uso:
 graph = Graph()
 
-graph.add_edge("Mario", "Acorn Plains", 20)
-graph.add_edge("Mario", "Sparkling Waters", 30)
-graph.add_edge("Mario", "Layer Cake Desert", 20)
-graph.add_edge("Acorn Plains", "Sparkling Waters", 10)
-graph.add_edge("Acorn Plains", "Layer Cake Desert", 15)
-graph.add_edge("Layer Cake Desert", "Princesa", 50)
-graph.add_edge("Sparkling Waters","Princesa", 180)
+graph.add_edge("Mario", "Acorn Plains", 30)
+graph.add_edge("Mario", "Layer-Cake_desert", 5)
+graph.add_edge("Mario", "Superstar road", 60)
+graph.add_edge("Acorn Plains", "Sparkling waters", 25)
+graph.add_edge("sparkling waters", "Soda Jungle", 10) 
+graph.add_edge("Layer-Cake_desert", "Soda Jungle", 40)
+graph.add_edge("Layer-Cake_desert", "Forest Glacier", 10)
+graph.add_edge("Forest Glacier", "Rock-Candy-Mines", 45)
+graph.add_edge("Superstar road", "Secret Island", 55)
+graph.add_edge("Forest Glacier", "Secret Island", 25)
+graph.add_edge("Rock-Candy-Mines",  "Peach's Castle", 30)
+graph.add_edge("Soda Jungle", "Peach's Castle", 40)
+graph.add_edge("Secret Island", "Peach's Castle", 25)
+graph.add_edge("Peach's Castle", "Princesa", 100)
+
 
 start_node = "Mario"
 end_node = "Princesa"
