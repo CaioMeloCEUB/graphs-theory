@@ -30,5 +30,8 @@ public class Main {
         } else {
             System.out.println("The graph is not completed\n");
         }
+
+        String resultCheckCircuitPath = CheckCircuitPath.checkCircuitOrPath(graph.nodes);
+        System.out.println(resultCheckCircuitPath);
     }
 }
