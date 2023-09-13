@@ -24,5 +24,42 @@ public class Main {
         Node dc10 = new Node("Jardim Botanico", 10);
         Node dc11 = new Node("Bosque dos Constituintes", 11);
         Node dc12 = new Node("Rodoviaria", 12);
+
+        List<Node> nos = new ArrayList<Node>();
+        nos.add(dc0);
+        nos.add(dc1);
+        nos.add(dc2);
+        nos.add(dc3);
+        nos.add(dc4);
+        nos.add(dc5);
+        nos.add(dc6);
+        nos.add(dc7);
+        nos.add(dc8);
+        nos.add(dc9);
+        nos.add(dc10);
+        nos.add(dc11);
+        nos.add(dc12);
+
+        Graph grafo = new Graph("Grafo das rodovias do DF", nos);
+
+        grafo.addDirectedEdge(0, 1, 7115);
+        grafo.addDirectedEdge(0, 2, 3560);
+        grafo.addDirectedEdge(0, 3, 7115);
+        grafo.addDirectedEdge(1, 3, 7115);
+        grafo.addDirectedEdge(2, 10, 7120);
+        grafo.addDirectedEdge(3, 4, 10674);
+        grafo.addDirectedEdge(4, 5, 10674);
+        grafo.addDirectedEdge(5, 7, 10674);
+        grafo.addDirectedEdge(6, 8, 10674);
+        grafo.addDirectedEdge(7, 12, 10674);
+        grafo.addDirectedEdge(7, 6, 10679);
+        grafo.addDirectedEdge(8, 9, 7120);
+        grafo.addDirectedEdge(9, 12, 17800);
+        grafo.addDirectedEdge(10, 11, 10674);
+        grafo.addDirectedEdge(11, 12, 17800);
+
+        grafo.printGraph();
+        grafo.printMatrix();
+        System.out.println(grafo.fordFulkerson());
     }
 }

@@ -1,6 +1,8 @@
 package classesJava;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class Graph {
     private String name;
@@ -16,42 +18,87 @@ public class Graph {
         this.numVertexes = list.size();
         this.adjMatrix = new int[numVertexes][numVertexes];
         this.residualGraph = new int[numVertexes][numVertexes];
+    }
 
-        int i = 0;
-        for (Node o: list){
-            o.setAdjMatrixNum(i);
-            i++;
+    public void setAllAdjacents (int origin, int end) {
+        List<Node> list_adj_origin = new ArrayList<Node>();
+        List<Node> list_adj_end = new ArrayList<Node>();
+        for (Node n: this.vertexes) {
+            if (n.getId() == origin) {
+                list_adj_end.add(n);
+            }
+            if (n.getId() == end) {
+                list_adj_origin.add(n);
+            }
+        }
+        for (Node n: this.vertexes) {
+            if (n.getId() == origin) {
+                n.setAdjacents(list_adj_origin);
+                System.out.print("Adjacentes ID " + n.getId() + ": ");
+                for (Node o: list_adj_origin) {
+                    System.out.print(o.getId() + ", ");
+                }
+                System.out.println();
+            }
+            if (n.getId() == end) {
+                n.setAdjacents(list_adj_end);
+                System.out.println("Adjacentes ID " + n.getId() + ": ");
+                for (Node o: list_adj_end) {
+                    System.out.print(o.getId() + ", ");
+                }
+                System.out.println();
+            }
         }
     }
 
     public void addEdge (int origin, int end) {
         this.adjMatrix[origin][end] = 1;
         this.adjMatrix[end][origin] = 1;
+        this.setAllAdjacents(origin, end);
+        this.setNumEdges();
     }
 
     public void addEdge (int origin, int end, int value) {
         this.adjMatrix[origin][end] = value;
         this.adjMatrix[end][origin] = value;
+        this.setAllAdjacents(origin, end);
+        this.setNumEdges();
     }
 
     public void addEdge (int origin, int end, int valueOne, int valueTwo) {
         this.adjMatrix[origin][end] = valueOne;
         this.adjMatrix[end][origin] = valueTwo;
+        this.setAllAdjacents(origin, end);
+        this.setNumEdges();
     }
     public void addDirectedEdge (int origin, int end, int value) {
         this.adjMatrix[origin][end] = value;
+        this.setAllAdjacents(origin, end);
+        this.setNumEdgesDirected();
     }
 
     public void setNumEdges() {
         int n = 0;
         for (int i = 0; i < this.numVertexes; i++) {
             for (int j = 0; j < this.numVertexes; j++) {
-                if(this.adjMatrix[i][j] == 1) {
+                if(this.adjMatrix[i][j] != 0) {
                     n++;
                 }
             }
         }
         this.numEdges = n/2;
+    }
+
+    public void setNumEdgesDirected() {
+        int n = 0;
+        for (int i = 0; i < this.numVertexes; i++) {
+            for (int j = 0; j < this.numVertexes; j++) {
+                if(this.adjMatrix[i][j] != 0) {
+                    n++;
+                }
+            }
+        }
+        this.numEdges = n;
     }
 
     // 3 - A verificação booleana se o grafo é conexo
@@ -67,9 +114,36 @@ public class Graph {
         }
     }
 
-    public boolean DFS(Node s, Node t) {
-        s.setVisited();
-        if (t.getVisited()) {
+    public boolean DFS(int s, int t, int parent[]) {
+        boolean visited[] = new boolean[this.numVertexes];
+        for (int i = 0; i < this.numVertexes - 1; i++) {
+            visited[i] = false;
+        }
+
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+        queue.add(s);
+        visited[s] = true;
+        parent[s] = -1;
+
+        while (queue.size() != 0) {
+            int u = queue.poll();
+            for (int i = 0; i < this.numVertexes; i++) {
+                if (visited[i] == false && this.residualGraph[u][i] > 0) {
+                    if (i == t) {
+                        parent[i] = u;
+                        return true;
+                    }
+                    queue.add(i);
+                    parent[i] = u;
+                    visited[i] = true;
+                }
+            }
+        }
+
+        return false;
+
+        /* s.setVisited();
+        if (t.getVisited() || s.getId() == t.getId()) {
             return true;
         }
         List<Node> neighbours = s.getAdjacents();
@@ -78,40 +152,26 @@ public class Graph {
                 DFS(o, t);
             }
         }
-        return false;
+        return false; */
     }
 
     public int fordFulkerson () {
         int max_flow = 0;
-        while(DFS(this.vertexes.get(0), this.vertexes.get(this.vertexes.size() - 1))) {
+        int parent[] = new int[this.numVertexes];
+        int s = this.vertexes.get(0).getId();
+        int t = this.vertexes.get(this.vertexes.size() - 1).getId();
+        while(DFS(s, t, parent)) {
             int path_flow = Integer.MAX_VALUE;
-            int[] path_list = new int[this.numVertexes];
-            int i = 0;
-            for (Node o: vertexes) {
-                if (o.getVisited()) {
-                    path_list[i] = o.getId();
-                    i++;
-                }
-            }
-            int j = 0;
-
-            for (i = 0; i < this.numVertexes - 2; i++) {
-                for (j = 1; j < this.numVertexes - 1; j++) {
-                    path_flow = Math.min (adjMatrix[i][j], path_flow);
-                }
+            for (int i = t; i != s; i = parent[i]) {
+                int u = parent[i];
+                path_flow = Math.min (path_flow, residualGraph[u][i]);
             }
 
-            for (i = 0; i < this.numVertexes - 2; i++) {
-                for (j = 1; j < this.numVertexes - 1; j++) {
-                    this.residualGraph[i][j] -= path_flow;
-                    this.residualGraph[j][i] += path_flow;
-                }
+            for (int i = t; i != s; i = parent[i]) {
+                int u = parent[i];
+                residualGraph[u][i] -= path_flow;
+                residualGraph[i][u] += path_flow;
             }
-
-            for (Node n: this.vertexes) {
-                n.setVisitedFalse();
-            }
-
             max_flow += path_flow;
         }
         return max_flow;
@@ -229,7 +289,7 @@ public class Graph {
         this.setNumEdges();
         for (Node n: this.vertexes) {
             List<Node> adjacents = n.getAdjacents();
-            System.out.print("Nome: " + n.getName() + " | Número na matriz: " + n.getAdjMatrixNum() + " | Grau: " + n.nodeDegree());
+            System.out.print("Nome: " + n.getName() + " | Número na matriz: " + n.getId() + " | Grau: " + n.nodeDegree());
             System.out.print(" | Adjacentes: ");
             if (adjacents != null) {
                 for (Node o: adjacents) {

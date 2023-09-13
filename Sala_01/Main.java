@@ -92,7 +92,6 @@ public class Main {
             if(n.getName() != dc0.getName()) {
                 adjn0.add(n);
             }
-
         }
         dc0.setAdjacents(adjn0);
         for(Node n: nos){

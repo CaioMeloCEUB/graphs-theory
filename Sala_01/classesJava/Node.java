@@ -5,7 +5,6 @@ import java.util.List;
 public class Node {
     private String name;
     private int id;
-    private int adjMatrixNum;
     private List<Node> adjacents;
     private boolean visited;
     private boolean noAdjacents;
@@ -44,10 +43,6 @@ public class Node {
         return this.adjacents;
     }
 
-    public int getAdjMatrixNum() {
-        return this.adjMatrixNum;
-    }
-
     public boolean getVisited() {
         return this.visited;
     }
@@ -60,15 +55,15 @@ public class Node {
         this.name = n;
     }
 
+    public void setAdjacent(Node node) {
+        this.adjacents.add(node);
+        this.noAdjacents = false;
+    }
+
     public void setAdjacents(List<Node> list) {
         this.adjacents = list;
         this.noAdjacents = false;
     }
-
-    public void setAdjMatrixNum (int i) {
-        this.adjMatrixNum = i;
-    }
-
 
     public void setIndividualAdjacent(Node n){
         this.adjacents.add(n);
