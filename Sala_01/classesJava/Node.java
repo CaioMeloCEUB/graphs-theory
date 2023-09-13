@@ -4,23 +4,40 @@ import java.util.List;
 
 public class Node {
     private String name;
+    private int id;
     private int adjMatrixNum;
     private List<Node> adjacents;
     private boolean visited;
+    private boolean noAdjacents;
+
+    public Node(String n, List<Node> list, int id) {
+        this.name = n;
+        this.id = id;
+        this.adjacents = list;
+        this.visited = false;
+        this.noAdjacents = false;
+    }
 
     public Node(String n, List<Node> list) {
         this.name = n;
         this.adjacents = list;
         this.visited = false;
+        this.noAdjacents = false;
     }
 
-    public Node(String n) {
+    public Node(String n, int id) {
         this.name = n;
+        this.id = id;
         this.visited = false;
+        this.noAdjacents = true;
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public List<Node> getAdjacents() {
@@ -35,12 +52,17 @@ public class Node {
         return this.visited;
     }
 
+    public boolean getNoAdjacents() {
+        return this.noAdjacents;
+    }
+
     public void setName(String n) {
         this.name = n;
     }
 
     public void setAdjacents(List<Node> list) {
         this.adjacents = list;
+        this.noAdjacents = false;
     }
 
     public void setAdjMatrixNum (int i) {
@@ -50,6 +72,7 @@ public class Node {
 
     public void setIndividualAdjacent(Node n){
         this.adjacents.add(n);
+        this.noAdjacents = false;
     }
 
     public void setVisited() {
@@ -63,7 +86,11 @@ public class Node {
     // 1 - O grau de um determinado vértice
 
     public int nodeDegree() {
-        return this.adjacents.size();
+        if (this.adjacents != null) {
+            return this.adjacents.size();
+        } else {
+            return 0;
+        }    
     }
 
     // 2 - A vizinhança de um determinado vértice

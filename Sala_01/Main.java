@@ -9,25 +9,31 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main (String[] args) {
-        Node dc0 = new Node("Data Center 0");
-        Node dc1 = new Node("Data Center 1");
-        Node dc2 = new Node("Data Center 2");
-        Node dc3 = new Node("Data Center 3");
-        Node dc4 = new Node("Data Center 4");
-        Node dc5 = new Node("Data Center 5");
-        Node dc6 = new Node("Data Center 6");
-        Node dc7 = new Node("Data Center 7");
-        Node dc8 = new Node("Data Center 8");
-        Node dc9 = new Node("Data Center 9");
-        Node dc10 = new Node("Data Center 10");
-        Node dc11 = new Node("Data Center 11");
-        Node dc12 = new Node("Data Center 12");
+        Node dc0 = new Node("Data Center 0", 0);
+        Node dc1 = new Node("Data Center 1", 1);
+        Node dc2 = new Node("Data Center 2", 2);
+        Node dc3 = new Node("Data Center 3", 3);
+        Node dc4 = new Node("Data Center 4", 4);
+        Node dc5 = new Node("Data Center 5", 5);
+        Node dc6 = new Node("Data Center 6", 6);
+        Node dc7 = new Node("Data Center 7", 7);
+        Node dc8 = new Node("Data Center 8", 8);
+        Node dc9 = new Node("Data Center 9", 9);
+        Node dc10 = new Node("Data Center 10", 10);
+        Node dc11 = new Node("Data Center 11", 11);
+        Node dc12 = new Node("Data Center 12", 12);
 
         // Bonus Round: três novos data centers
 
-        Node dc13 = new Node("Data Center 13");
-        Node dc14 = new Node("Data Center 14");
-        Node dc15 = new Node("Data Center 15");
+        Node dc13 = new Node("Data Center 13", 13);
+        Node dc14 = new Node("Data Center 14", 14);
+        Node dc15 = new Node("Data Center 15", 15);
+
+        //
+
+        // Teste caminho e circuito
+
+        /* Node dc16 = new Node("Data Center 16"); */
 
         //
 
@@ -73,6 +79,12 @@ public class Main {
         nos.add(dc13);
         nos.add(dc14);
         nos.add(dc15);
+
+        //
+
+        // Teste caminho e circuito
+
+        /* nos.add(dc16); */
 
         //
 
@@ -189,18 +201,44 @@ public class Main {
             }
         }
 
-        grafo.printGraph();
-        grafo.printMatrix();
+        // Teste caminho e circuito
 
         /* List<Node> caminhoTrue = new ArrayList<Node>();
         caminhoTrue.add(dc0);
         caminhoTrue.add(dc1);
+
         List<Node> caminhoFalse = new ArrayList<Node>();
         caminhoTrue.add(dc0);
-        caminhoTrue.add(dc2);
-        List<Node> circuitoTrue = new ArrayList<Node>();
+        caminhoTrue.add(dc16);
 
-        System.out.println("Teste das funções de caminho e circuito");
-        System.out.println("Teste das funções de caminho e circuito"); */
+        List<Node> circuitoTrue = new ArrayList<Node>();
+        circuitoTrue.add(dc0);
+        circuitoTrue.add(dc1);
+        circuitoTrue.add(dc2);
+        circuitoTrue.add(dc0);
+
+        List<Node> circuitoFalse = new ArrayList<Node>();
+        circuitoTrue.add(dc0);
+        circuitoTrue.add(dc1);
+        circuitoTrue.add(dc2);
+
+        List<Node> circuitoFalseDois = new ArrayList<Node>();
+        circuitoTrue.add(dc0);
+        circuitoTrue.add(dc1);
+        circuitoTrue.add(dc16);
+        circuitoTrue.add(dc0);
+
+        System.out.println("Teste das funções de caminho e circuito\n");
+        System.out.println("Caminho True: " + grafo.isPath(caminhoTrue));
+        System.out.println("Caminho False: " + grafo.isPath(caminhoFalse));
+        System.out.println("Circuito True: " + grafo.isPath(circuitoTrue));
+        System.out.println("Circuito False: " + grafo.isPath(circuitoFalse));
+        System.out.println("Circuito False 2: " + grafo.isPath(circuitoFalseDois)); */
+
+        //
+
+        grafo.printGraph();
+        grafo.printMatrix();
+
     }
 }
