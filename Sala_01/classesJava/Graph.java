@@ -38,6 +38,9 @@ public class Graph {
         this.adjMatrix[origin][end] = valueOne;
         this.adjMatrix[end][origin] = valueTwo;
     }
+    public void addDirectedEdge (int origin, int end, int value) {
+        this.adjMatrix[origin][end] = value;
+    }
 
     public void setNumEdges() {
         int n = 0;
