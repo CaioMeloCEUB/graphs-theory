@@ -1,9 +1,5 @@
 package FordFulkerson;
 
-// Ivan de Medeiros Yared
-// Matheus Belo Palazzo
-// Victor Daniel dos Santos Gonçalves
-
 import classesJava.Graph;
 import classesJava.Node;
 import java.util.List;
@@ -58,7 +54,6 @@ public class Main {
         grafo.addDirectedEdge(10, 11, 10674);
         grafo.addDirectedEdge(11, 12, 17800);
 
-        grafo.printGraph();
         grafo.printMatrix();
     }
 }

@@ -87,7 +87,6 @@ public class Graph {
                 }
             }
         }
-        System.out.println(n);
         this.numEdges = n;
     }
 
