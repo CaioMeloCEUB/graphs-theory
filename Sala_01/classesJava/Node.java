@@ -1,5 +1,6 @@
 package classesJava;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
@@ -56,17 +57,13 @@ public class Node {
     }
 
     public void setAdjacent(Node node) {
+        this.adjacents = new ArrayList<Node>();
         this.adjacents.add(node);
         this.noAdjacents = false;
     }
 
     public void setAdjacents(List<Node> list) {
         this.adjacents = list;
-        this.noAdjacents = false;
-    }
-
-    public void setIndividualAdjacent(Node n){
-        this.adjacents.add(n);
         this.noAdjacents = false;
     }
 

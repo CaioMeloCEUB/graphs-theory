@@ -1,7 +1,6 @@
 package classesJava;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 
 public class Graph {
@@ -16,6 +15,7 @@ public class Graph {
         this.name = n;
         this.vertexes = list;
         this.numVertexes = list.size();
+        this.numEdges = 0;
         this.adjMatrix = new int[numVertexes][numVertexes];
         this.residualGraph = new int[numVertexes][numVertexes];
     }
@@ -26,27 +26,15 @@ public class Graph {
         for (Node n: this.vertexes) {
             if (n.getId() == origin) {
                 list_adj_end.add(n);
-            }
-            if (n.getId() == end) {
+            } else if (n.getId() == end) {
                 list_adj_origin.add(n);
             }
         }
         for (Node n: this.vertexes) {
             if (n.getId() == origin) {
-                n.setAdjacents(list_adj_origin);
-                System.out.print("Adjacentes ID " + n.getId() + ": ");
-                for (Node o: list_adj_origin) {
-                    System.out.print(o.getId() + ", ");
-                }
-                System.out.println();
-            }
-            if (n.getId() == end) {
-                n.setAdjacents(list_adj_end);
-                System.out.println("Adjacentes ID " + n.getId() + ": ");
-                for (Node o: list_adj_end) {
-                    System.out.print(o.getId() + ", ");
-                }
-                System.out.println();
+                n.setAdjacent(list_adj_origin.get(0));
+            } else if (n.getId() == end) {
+                n.setAdjacent(list_adj_end.get(0));
             }
         }
     }
@@ -73,6 +61,7 @@ public class Graph {
     }
     public void addDirectedEdge (int origin, int end, int value) {
         this.adjMatrix[origin][end] = value;
+        this.residualGraph[origin][end] = value;
         this.setAllAdjacents(origin, end);
         this.setNumEdgesDirected();
     }
@@ -98,6 +87,7 @@ public class Graph {
                 }
             }
         }
+        System.out.println(n);
         this.numEdges = n;
     }
 
@@ -114,7 +104,7 @@ public class Graph {
         }
     }
 
-    public boolean DFS(int s, int t, int parent[]) {
+    public boolean BFS(int s, int t, int parent[]) {
         boolean visited[] = new boolean[this.numVertexes];
         for (int i = 0; i < this.numVertexes - 1; i++) {
             visited[i] = false;
@@ -160,7 +150,7 @@ public class Graph {
         int parent[] = new int[this.numVertexes];
         int s = this.vertexes.get(0).getId();
         int t = this.vertexes.get(this.vertexes.size() - 1).getId();
-        while(DFS(s, t, parent)) {
+        while(BFS(s, t, parent)) {
             int path_flow = Integer.MAX_VALUE;
             for (int i = t; i != s; i = parent[i]) {
                 int u = parent[i];
@@ -329,5 +319,6 @@ public class Graph {
             System.out.println();
         }
         System.out.println();
+        System.out.println("Fluxo máximo no grafo: " + this.fordFulkerson());
     }    
 }

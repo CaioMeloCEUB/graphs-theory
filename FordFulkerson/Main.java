@@ -60,6 +60,5 @@ public class Main {
 
         grafo.printGraph();
         grafo.printMatrix();
-        System.out.println(grafo.fordFulkerson());
     }
 }
