@@ -1,2 +1,3 @@
-# graph-22023
-Teoria de Grafos - Sexto Semestre - Ciências da Computação - CEUB 
+# graphs theory
+Teoria de Grafos
+Professor: Caio César de Melo e Silva
