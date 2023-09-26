@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ---- Classe Graph ----
  * 
- * A classe Graph representa a estrutura de dados para um Grafo na Teoria dos Grafos.
+ * Classe Graph representa a estrutura de dados para um Grafo na Teoria dos Grafos.
  *
  * ---- Tipos de Grafos ----
  * Esta implementação é genérica o suficiente para representar diversos tipos de grafos:
@@ -63,17 +62,40 @@ public class Graph {
      */
     private Map<Node, List<Edge>> adjacencyList;
 
-    // Construtor para inicializar a lista de adjacência
+    /**
+     * Inicializa um novo objeto Graph com uma lista de adjacência vazia.
+     * <p>
+     * Este construtor cria um novo objeto Graph e inicializa sua lista de adjacência como um HashMap vazio.
+     * É útil quando você deseja construir um grafo do zero.
+     * </p>
+     */
     public Graph() {
         this.adjacencyList = new HashMap<>();
     }
 
-    // Método para adicionar um Nó com id e valor padrão de 0
+    /**
+     * Adiciona um novo Nó ao grafo com um id específico e valor padrão de 0.
+     * <p>
+     * Este método cria um novo objeto Node com o id fornecido e um valor padrão de 0.
+     * Ele então adiciona este nó à lista de adjacência do grafo, caso ainda não exista.
+     * </p>
+     * 
+     * @param id O identificador único para o novo nó.
+     */
     public void addNode(String id) {
         addNode(id, 0);
     }
 
-    // Método para adicionar um Nó com id e valor específicos
+    /**
+     * Adiciona um novo Nó ao grafo com um id e valor específicos.
+     * <p>
+     * Este método cria um novo objeto Node com o id e valor fornecidos.
+     * Ele então adiciona este nó à lista de adjacência do grafo, caso ainda não exista.
+     * </p>
+     *
+     * @param id    O identificador único para o novo nó.
+     * @param value O valor a ser associado ao novo nó.
+     */
     public void addNode(String id, int value) {
         Node node = new Node(id, value);
         adjacencyList.putIfAbsent(node, new ArrayList<>());
