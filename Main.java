@@ -19,7 +19,7 @@ public class Main {
             e.printStackTrace();
         }
 
-      // Imprimir Grafo
+      // Imprimir matriz de adjacencia
       graph.printAdjacencyMatrix();
     }
 }

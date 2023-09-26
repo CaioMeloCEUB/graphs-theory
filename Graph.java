@@ -37,7 +37,7 @@ import java.util.Map;
  * - {@link NodeNotFoundException} é lançada se um nó não for encontrado durante a adição de uma aresta.
  * - {@link DuplicatedEdgeException} é lançada se uma aresta duplicada for tentada ser adicionada.
  * 
- * @author Graph Theory Class | UniCEUB | 2-2023
+ * @author Graph Theory Class | UniCEUB | Prof. Caio de Melo
  * @version 0.1
  * @see Node
  * @see Edge
@@ -209,8 +209,8 @@ public class Graph {
         List<Edge> edges = adjacencyList.get(source);   // Obtém a lista de arestas associadas ao nó de origem
         if (edges != null) {                            // Verifica se a lista de arestas não é nula (o nó de origem existe no grafo)
             for (Edge edge : edges) {                   // Itera sobre todas as arestas associadas ao nó de origem
-                if (edge.destination.equals(target)) {  // Verifica se a aresta aponta para o nó de destino
-                    return edge.value;                  // Retorna o valor (peso) da aresta
+                if (edge.getDestination().equals(target)) {  // Verifica se a aresta aponta para o nó de destino
+                    return edge.getValue();                  // Retorna o valor (peso) da aresta
                 }
             }
         }
@@ -237,19 +237,155 @@ public class Graph {
         return 0;  // Retorna 0 se não encontrar uma aresta entre os nós de origem e destino
     }
 
+    /**
+     * Obtém a lista de nós vizinhos de um dado nó.
+     * 
+     * --- Conceitos Formais ---
+     * Em teoria dos grafos, a vizinhança N(v) de um vértice v é o conjunto de todos os vértices
+     * que são extremidades de pelo menos uma aresta com v. No caso de grafos direcionados, isso
+     * pode ser diferenciado em vizinhança de entrada e de saída.
+     *
+     * --- Insights Práticos ---
+     * Esse método é fundamental para operações como buscas em grafos (DFS, BFS), detecção de comunidades,
+     * cálculo de centralidade, por exemplo. É uma operação frequentemente utilizada em algoritmos de grafos.
+     *
+     * @param nodeId O ID do nó cujos vizinhos são desejados.
+     * @return Uma lista de nós que são vizinhos do nó em questão.
+     * @throws NodeNotFoundException se o nó com o ID fornecido não for encontrado no grafo.
+     */
+    public List<Node> getNeighbors(String nodeId) throws NodeNotFoundException {
+        Node node = new Node(nodeId, 0);
+        if (!adjacencyList.containsKey(node)) {
+            throw new NodeNotFoundException("Node with ID " + nodeId + " does not exist.");
+        }
+        
+        List<Node> neighbors = new ArrayList<>();
+        for (Edge edge : adjacencyList.get(node)) {
+            neighbors.add(edge.getDestination());
+        }
+        return neighbors;
+    }
+
+    /**
+     * Obtém o grau de um dado nó.
+     * 
+     * --- Conceitos Formais ---
+     * Em teoria dos grafos, o grau de um vértice v, denotado como deg(v), é o número de arestas que
+     * têm v como uma extremidade. Em grafos direcionados, pode-se diferenciar entre grau de entrada e
+     * grau de saída.
+     *
+     * --- Insights Práticos ---
+     * O grau de um nó é uma medida de centralidade que pode ser usada para entender a importância ou
+     * influência de um vértice em uma rede. É um indicador básico, mas poderoso, usado em análise de redes,
+     * detecção de anomalias, por exemplo.
+     * 
+     * @param nodeId O ID do nó cujo grau é desejado.
+     * @return O grau do nó.
+     * @throws NodeNotFoundException se o nó com o ID fornecido não for encontrado no grafo.
+     */
+    public int getNodeDegree(String nodeId) throws NodeNotFoundException {
+        Node node = new Node(nodeId, 0);
+        if (!adjacencyList.containsKey(node)) {
+            throw new NodeNotFoundException("Node with ID " + nodeId + " does not exist.");
+        }
+
+        return adjacencyList.get(node).size();
+    }
+
+    /**
+     * Obtém o grau mínimo entre todos os nós do grafo.
+     * 
+     * --- Aspectos Teóricos ---
+     * O grau mínimo é o menor grau entre todos os vértices do grafo. Ele é uma métrica importante
+     * para entender a esparsidade da rede e pode ser crucial em algoritmos que buscam otimizar
+     * caminhos, como Dijkstra e Prim.
+     *
+     * --- Aspectos Práticos ---
+     * O grau mínimo é frequentemente utilizado para entender pontos de falha em redes ou para 
+     * identificar nós que são menos conectados e, portanto, menos influentes em uma rede social, por exemplo.
+     * 
+     * @return O grau mínimo entre todos os nós do grafo.
+     */
+    public int getMinimumDegree(){
+        int minDegree = Integer.MAX_VALUE;
+
+        for (List<Edge> edges : adjacencyList.values()) {
+            int degree = edges.size();
+            if (degree < minDegree) {
+                minDegree = degree;
+            }
+        }
+    
+        return minDegree;
+    }
+
+    /**
+     * Obtém o grau máximo entre todos os nós do grafo.
+     * 
+     * --- Aspectos Teóricos ---
+     * O grau máximo é o maior grau entre todos os vértices de um grafo. Ele pode ser um indicador de 
+     * vértices que são centrais ou importantes para a conectividade do grafo.
+     *
+     * --- Aspectos Práticos ---
+     * Em redes sociais, o nó com o grau máximo pode ser uma pessoa muito conectada ou influente.
+     * Em redes de computadores, pode ser um roteador principal ou um servidor.
+     * 
+     * @return O grau máximo entre todos os nós do grafo.
+     */
+    public int getMaximumDegree(){
+        int maxDegree = Integer.MIN_VALUE;
+
+        for (List<Edge> edges : adjacencyList.values()) {
+            int degree = edges.size();
+            if (degree > maxDegree) {
+                maxDegree = degree;
+            }
+        }
+    
+        return maxDegree;
+    }
+
+    /**
+     * Verifica se o grafo é regular.
+     * 
+     * --- Aspectos Teóricos ---
+     * Um grafo é dito regular se todos os seus vértices possuem o mesmo grau. Essa é uma propriedade
+     * estrutural interessante que simplifica muitos problemas em teoria dos grafos.
+     *
+     * --- Aspectos Práticos ---
+     * Grafos regulares são importantes em design de redes, onde a uniformidade pode simplificar o roteamento
+     * e balanceamento de carga. Também são utilizados em modelagem e simulação de sistemas igualmente distribuídos.
+     * 
+     * @return Verdadeiro se o grafo é regular, falso caso contrário.
+     */
+    public boolean isGraphRegular(){
+        if (adjacencyList.isEmpty()) return true;
+
+        int degree = adjacencyList.values().iterator().next().size();
+    
+        for (List<Edge> edges : adjacencyList.values()) {
+            if (edges.size() != degree) {
+                return false;
+            }
+        }
+    
+        return true;
+    }
+
+
     private void ensureNodeExistsOrCreated(Node node, boolean create) throws NodeNotFoundException {
         if (!adjacencyList.containsKey(node)) {
             if (create) {
-                addNode(node.id, node.value);
+                addNode(node.getID(), node.getValue());
             } else {
-                throw new NodeNotFoundException("Node with ID " + node.id + " does not exist.");
+                throw new NodeNotFoundException("Node with ID " + node.getID() + " does not exist.");
             }
         }
     }
 
     private void ensureEdgeIsUnique(Node source, Node destination) throws DuplicatedEdgeException {
         List<Edge> edges = adjacencyList.get(source);
-        if (edges != null && edges.stream().anyMatch(edge -> edge.destination.equals(destination))) {
+        if (edges != null && edges.stream().anyMatch(edge -> edge.getDestination().equals(destination))) {
             throw new DuplicatedEdgeException("Edge from " + source + " to " + destination + " already exists.");
         }
     }
@@ -262,20 +398,18 @@ public class Graph {
         }
     }
 
-
-
     public void printAdjacencyMatrix() {
         int[][] matrix = this.getAdjacencyMatrix();
         List<Node> nodes = this.getNodesList();
         System.out.print("    ");
         for (Node node : nodes) {
-            System.out.print(node.id + " ");
+            System.out.print(node.getID() + " ");
         }
         System.out.println();
 
         // Imprimir a matriz junto com os rótulos dos nós para as linhas
         for (int i = 0; i < matrix.length; i++) {
-            System.out.print(nodes.get(i).id + "   ");
+            System.out.print(nodes.get(i).getID() + "   ");
             for (int j = 0; j < matrix[i].length; j++) {
                 System.out.print(matrix[i][j] + " ");
             }

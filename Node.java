@@ -1,31 +1,55 @@
-// Classe que representa um Nó.
-// Em teoria dos grafos, um nó (também conhecido como vértice) é uma das duas partes fundamentais de um grafo.
-// A outra parte são as arestas que conectam os nós.
+/**
+ * Classe que representa um Nó (Vértice) em um grafo.
+ * <p>
+ * Na teoria dos grafos, um nó ou vértice é uma das duas entidades fundamentais de um grafo,
+ * sendo a outra as arestas que conectam os nós. Cada nó pode ter um identificador único e um valor associado.
+ * </p>
+ */
 public class Node {
-    
-     // O identificador único para o nó.
-    // Em grafos, cada nó geralmente tem um rótulo ou ID único que o identifica.
-    String id;
 
-    // O valor associado ao nó.
-    // Em alguns grafos, um valor (também conhecido como peso) pode ser associado a um nó.
-    int value;
+    /**
+     * O identificador único para o nó.
+     * Este ID é usado para diferenciar cada nó dentro do grafo.
+     * Em aplicações práticas, pode ser um identificador de um objeto no domínio do problema.
+     */
+    private String id;
 
-    // Construtor que inicializa o nó com um ID.
-    // Útil para grafos onde apenas a identidade do nó é relevante.
+    /**
+     * O valor associado ao nó.
+     * Em grafos ponderados, este valor pode representar uma métrica como custo, distância, etc.
+     * Em grafos não ponderados, este valor pode não ter significado.
+     */
+    private int value;
+
+    /**
+     * Construtor para inicializar o nó com apenas um ID.
+     * Útil para grafos onde somente a identidade do nó é relevante.
+     *
+     * @param id O identificador único para o nó.
+     */
     public Node(String id) {
         this.id = id;
     }
 
-    // Construtor que inicializa o nó com um ID e um valor.
-    // Útil para grafos ponderados, onde os nós têm pesos ou valores associados.
+    /**
+     * Construtor para inicializar o nó com um ID e um valor associado.
+     * Útil para grafos ponderados onde os nós têm valores ou pesos.
+     *
+     * @param id    O identificador único para o nó.
+     * @param value O valor associado ao nó.
+     */
     public Node(String id, int value) {
         this.id = id;
         this.value = value;
     }
 
-    // Verifica a igualdade com base no ID do nó.
-    // Isso é crucial para a identificação única de nós no grafo.
+    /**
+     * Verifica a igualdade de dois nós com base no seu ID.
+     * Essa implementação é crucial para garantir que cada nó seja único dentro do grafo.
+     *
+     * @param o O objeto a ser comparado com este nó.
+     * @return  Verdadeiro se os dois nós forem iguais, falso caso contrário.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,17 +58,33 @@ public class Node {
         return id.equals(node.id);
     }
 
-    // Gera um código hash com base no ID do nó.
-    // Isso é útil para a recuperação eficiente de nós em coleções baseadas em hash, como o HashMap.
+    /**
+     * Gera um código hash com base no ID do nó.
+     * Útil para operações de recuperação eficiente em coleções baseadas em hash, como HashMap.
+     *
+     * @return O código hash do nó.
+     */
     @Override
     public int hashCode() {
         return id.hashCode();
     }
 
-    // Retorna uma representação em string do nó, que é seu ID.
-    // Útil para depuração e exibição do nó.
+    /**
+     * Retorna uma representação em String do nó, que é basicamente seu ID.
+     * Útil para fins de depuração e visualização da estrutura do grafo.
+     *
+     * @return A representação em String do nó.
+     */
     @Override
     public String toString() {
-        return id;
+        return id + " (Value: " + value + ")";
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    public String getID() {
+        return this.id;
     }
 }
