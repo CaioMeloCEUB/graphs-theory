@@ -1,30 +1,38 @@
-public class Edge {
+// Classe que representa uma Aresta
+// Na teoria dos grafos, uma aresta é um link entre dois nós (também chamados de vértices).
+// As arestas podem ser direcionadas ou não direcionadas, e podem ter um valor (ou peso) associado.
+class Edge {
+    // O nó de origem da aresta.
+    // Em uma aresta direcionada, este é o ponto de partida.
+    Node source;
 
-    private Node node1;
-    private Node node2;
-    private double weight;
+    // O nó de destino da aresta.
+    // Em uma aresta direcionada, este é o ponto de chegada.
+    Node destination;
 
-    public Edge(Node n1, Node n2) {
-        this.node1 = n1;
-        this.node2 = n2;
+    // O valor (ou peso) associado à aresta.
+    // Em grafos ponderados, as arestas têm um valor que pode representar distâncias, custos, etc.
+    int value;
+
+    // Construtor que cria uma aresta sem valor.
+    // Útil para grafos não ponderados.
+    public Edge(Node source, Node destination) {
+        this.source = source;
+        this.destination = destination;
     }
 
-    public Edge(Node n1, Node n2, double w) {
-        this.node1 = n1;
-        this.node2 = n2;
-        this.weight = w;
+    // Construtor que cria uma aresta com um valor.
+    // Útil para grafos ponderados.
+    public Edge(Node source, Node destination, int value) {
+        this.source = source;
+        this.destination = destination;
+        this.value = value;
     }
 
-    public void print() {
-        System.out.println(this.node1.getName() + " | "
-                + this.node2.getName() + " | " + this.weight);
-
-
+    // Retorna uma representação em string da aresta.
+    // Esta é uma forma conveniente de visualizar a aresta, especialmente útil para depuração.
+    @Override
+    public String toString() {
+        return source + " -> " + destination;
     }
-
-
-
-
-
-
 }
