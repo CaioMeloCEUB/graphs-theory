@@ -1,3 +1,6 @@
+import exceptions.DuplicatedEdgeException;
+import exceptions.NodeNotFoundException;
+
 public class Main {
     
     public static void main(String[] args) {

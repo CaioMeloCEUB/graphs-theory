@@ -1,30 +1,37 @@
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import exceptions.DuplicatedEdgeException;
+import exceptions.NodeNotFoundException;
 
 /**
  * 
  * Classe Graph representa a estrutura de dados para um Grafo na Teoria dos Grafos.
  *
- * ---- Tipos de Grafos ----
+ * 
  * Esta implementação é genérica o suficiente para representar diversos tipos de grafos:
  * - Grafos Direcionados (Digrafos)
  * - Grafos Não-Direcionados
  * - Grafos Ponderados (Arestas com pesos)
  * - Grafos Não-Ponderados
- *
- * ---- Conceitos Formais ----
+ * <p>
+ * Teoria dos Grafos:
  * - Vértices: Os nós do grafo, representados pela classe {@link Node}.
  * - Arestas: As conexões entre os nós, representadas pela classe {@link Edge}.
  * - Lista de Adjacência: Uma estrutura de dados eficiente para representar grafos esparsos, armazenada como {@code Map<Node, List<Edge>>}.
- * 
- * ---- Complexidade Computacional ----
+ * <p>
+ * Complexidade:
  * - Adicionar um Vértice: O(1)
  * - Adicionar uma Aresta: O(1) em média, se ignorarmos o tempo necessário para verificar a duplicação.
  * - Busca: O(1) para vértices e O(V) para arestas, onde V é o número de vértices.
  *
- * ---- Uso Prático ----
+ * <p>
+ * Insights Práticos:
  * - Redes Sociais: Utilizado para modelar relações entre indivíduos, podendo ajudar a identificar padrões e recomendar conexões.
  * - Sistemas de Recomendação: Eficiente para filtragem colaborativa, onde os nós podem ser usuários ou itens, e as arestas podem representar preferências ou comportamentos.
  * - Roteamento em Redes: Utilizado em algoritmos como OSPF (Open Shortest Path First) e BGP (Border Gateway Protocol) para encontrar o caminho mais eficiente entre dispositivos em uma rede.
@@ -32,7 +39,7 @@ import java.util.Map;
  * - Processamento de Texto: Utilizado em análise de sentimento, classificação de tópicos, e outras aplicações de NLP (Processamento de Linguagem Natural).
  * - Flexibilidade Algorítmica: A classe é projetada para permitir a fácil inclusão de métodos que implementam algoritmos gráficos específicos. Isso inclui, mas não está limitado a, busca em profundidade (DFS), busca em largura (BFS), algoritmos de caminho mais curto como Dijkstra e Floyd-Warshall, e algoritmos de fluxo máximo como Ford-Fulkerson.
  * 
- * ---- Exceções ----
+ * <p>
  * - {@link NodeNotFoundException} é lançada se um nó não for encontrado durante a adição de uma aresta.
  * - {@link DuplicatedEdgeException} é lançada se uma aresta duplicada for tentada ser adicionada.
  * 
@@ -44,16 +51,15 @@ import java.util.Map;
 public class Graph {
 
     /**
-     * ---- Campo de Dados: adjacencyList ----
      *
-     * O campo 'adjacencyList' é uma estrutura de dados do tipo Map que relaciona cada objeto Node a uma lista de arestas (Edge).
-     *
-     * ---- Conceitos Formais ----
+     * O atributo 'adjacencyList' é uma estrutura de dados do tipo Map que relaciona cada objeto Node a uma lista de arestas (Edge).
+     * <p>
+     * Teoria dos Grafos: 
      * - Representação de Grafos: Grafos podem ser representados de várias formas, e a Lista de Adjacência é uma das mais eficientes em termos de espaço e tempo para determinadas operações.
      * - Complexidade de Espaço: Em uma lista de adjacência, apenas as arestas realmente existentes são armazenadas, tornando-a eficiente em termos de espaço para grafos esparsos.
      * - Grafos Direcionados e Não Direcionados: Este campo é versátil o suficiente para representar tanto grafos direcionados quanto não direcionados. Em um grafo não direcionado, uma aresta entre 'A' e 'B' seria armazenada nas listas de ambos os nós.
-     *
-     * ---- Insights Práticos ----
+     * <p>
+     * Insights Práticos:
      * - Acessibilidade: Usar um Map oferece um acesso de tempo constante O(1) aos vértices e suas respectivas listas de arestas, tornando a estrutura eficiente para consultas e atualizações.
      * - Flexibilidade: Listas de adjacência são dinâmicas; portanto, adicionar ou remover vértices e arestas é feito de forma eficiente.
      * - Compatibilidade com Algoritmos: A maioria dos algoritmos modernos em teoria dos grafos são otimizados para trabalhar com listas de adjacência, tornando este campo adequado para implementações futuras de algoritmos como DFS, BFS, etc.
@@ -261,13 +267,14 @@ public class Graph {
 
     /**
      * Obtém a lista de nós vizinhos de um dado nó.
-     * 
-     * --- Conceitos Formais ---
+     * <p>
+     * Teoria dos Grafos: 
      * Em teoria dos grafos, a vizinhança N(v) de um vértice v é o conjunto de todos os vértices
      * que são extremidades de pelo menos uma aresta com v. No caso de grafos direcionados, isso
      * pode ser diferenciado em vizinhança de entrada e de saída.
-     *
-     * --- Insights Práticos ---
+     * </p>
+     * <p>
+     * Aplicações Práticas:
      * Esse método é fundamental para operações como buscas em grafos (DFS, BFS), detecção de comunidades,
      * cálculo de centralidade, por exemplo. É uma operação frequentemente utilizada em algoritmos de grafos.
      *
@@ -290,13 +297,14 @@ public class Graph {
 
     /**
      * Obtém o grau de um dado nó.
-     * 
-     * --- Conceitos Formais ---
+     * <p>
+     * Teoria dos Grafos: 
      * Em teoria dos grafos, o grau de um vértice v, denotado como deg(v), é o número de arestas que
      * têm v como uma extremidade. Em grafos direcionados, pode-se diferenciar entre grau de entrada e
      * grau de saída.
-     *
-     * --- Insights Práticos ---
+     * </p>
+     * <p>
+     * Aplicações Práticas:
      * O grau de um nó é uma medida de centralidade que pode ser usada para entender a importância ou
      * influência de um vértice em uma rede. É um indicador básico, mas poderoso, usado em análise de redes,
      * detecção de anomalias, por exemplo.
@@ -316,13 +324,14 @@ public class Graph {
 
     /**
      * Obtém o grau mínimo entre todos os nós do grafo.
-     * 
-     * --- Aspectos Teóricos ---
+     * <p>
+     * Teoria dos Grafos: 
      * O grau mínimo é o menor grau entre todos os vértices do grafo. Ele é uma métrica importante
      * para entender a esparsidade da rede e pode ser crucial em algoritmos que buscam otimizar
      * caminhos, como Dijkstra e Prim.
-     *
-     * --- Aspectos Práticos ---
+     * </p>
+     * <p>
+     * Aplicações Práticas:
      * O grau mínimo é frequentemente utilizado para entender pontos de falha em redes ou para 
      * identificar nós que são menos conectados e, portanto, menos influentes em uma rede social, por exemplo.
      * 
@@ -343,12 +352,13 @@ public class Graph {
 
     /**
      * Obtém o grau máximo entre todos os nós do grafo.
-     * 
-     * --- Aspectos Teóricos ---
+     * <p>
+     * Teoria dos Grafos: 
      * O grau máximo é o maior grau entre todos os vértices de um grafo. Ele pode ser um indicador de 
      * vértices que são centrais ou importantes para a conectividade do grafo.
-     *
-     * --- Aspectos Práticos ---
+     * </p>
+     * <p>
+     * Aplicações Práticas:
      * Em redes sociais, o nó com o grau máximo pode ser uma pessoa muito conectada ou influente.
      * Em redes de computadores, pode ser um roteador principal ou um servidor.
      * 
@@ -369,18 +379,19 @@ public class Graph {
 
     /**
      * Verifica se o grafo é regular.
-     * 
-     * --- Aspectos Teóricos ---
+     * <p>
+     * Teoria dos Grafos: 
      * Um grafo é dito regular se todos os seus vértices possuem o mesmo grau. Essa é uma propriedade
      * estrutural interessante que simplifica muitos problemas em teoria dos grafos.
-     *
-     * --- Aspectos Práticos ---
+     * </p>
+     * <p>
+     * Aplicações Práticas:
      * Grafos regulares são importantes em design de redes, onde a uniformidade pode simplificar o roteamento
      * e balanceamento de carga. Também são utilizados em modelagem e simulação de sistemas igualmente distribuídos.
      * 
      * @return Verdadeiro se o grafo é regular, falso caso contrário.
      */
-    public boolean isGraphRegular(){
+    public boolean isRegular(){
         if (adjacencyList.isEmpty()) return true;
 
         int degree = adjacencyList.values().iterator().next().size();
@@ -394,6 +405,108 @@ public class Graph {
         return true;
     }
 
+    /**
+     * Verifica se o grafo é direcionado ou não.
+     * <p>
+     * Teoria dos Grafos: 
+     * Um grafo é considerado direcionado (ou digrafo) quando as arestas possuem uma orientação, ou seja,
+     * a aresta que vai do vértice A para o vértice B não é a mesma que vai de B para A.
+     * </p>
+     * <p>
+     * Aplicações Práticas:
+     * 1. Redes Sociais: Representar quem segue quem.
+     * 2. Rotas: Representar a direção única de um caminho.
+     * 3. Dependências em sistemas: Representar a ordem em que tarefas devem ser realizadas.
+     * </p>
+     * <p>
+     * Complexidade: 
+     * O algoritmo tem uma complexidade de tempo O(V * E), onde V é o número de vértices e E é o número de arestas.
+     * Isso ocorre porque para cada nó, verificamos todas as suas arestas adjacentes.
+     * </p>
+     * 
+     * @return Verdadeiro se o grafo é direcionado, Falso caso contrário.
+     */
+    public boolean isDirected() {
+        // Utilizando um HashSet para armazenar pares de nós que representam arestas já visitadas.
+        Set<Map.Entry<Node, Node>> visitedEdges = new HashSet<>();
+
+        // Iterando sobre todos os nós e suas listas de arestas adjacentes
+        for (Map.Entry<Node, List<Edge>> entry : adjacencyList.entrySet()) {
+            Node sourceNode = entry.getKey();
+
+            for (Edge edge : entry.getValue()) {
+                Node destNode = edge.getDestination();
+
+                // Criando um par imutável representando a aresta reversa
+                Map.Entry<Node, Node> reverseEdge = new AbstractMap.SimpleImmutableEntry<>(destNode, sourceNode);
+
+                // Se a aresta reversa não foi visitada, o grafo é direcionado
+                if (!visitedEdges.contains(reverseEdge)) {
+                    return true;
+                }
+
+                // Adicionando a aresta atual ao conjunto de arestas visitadas
+                visitedEdges.add(new AbstractMap.SimpleImmutableEntry<>(sourceNode, destNode));
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Imprime a matriz de adjacência do grafo no console.
+     * 
+     * <p>
+     * Teoria dos Grafos:
+     * A matriz de adjacência é uma representação quadrada do grafo onde o elemento (i, j) é 1 se há uma aresta
+     * entre os vértices i e j, e 0 caso contrário. Em grafos ponderados, o peso substitui o valor 1.
+     * </p>
+     * 
+     * <p>
+     * Complexidade do Algoritmo:
+     * O tempo de execução é O(n^2), onde n é o número de vértices. Isso se deve à iteração por cada célula da matriz.
+     * </p>
+     */
+    public void printAdjacencyMatrix() {
+        int[][] matrix = this.getAdjacencyMatrix();
+        List<Node> nodes = this.getNodesList();
+        System.out.print("    ");
+        for (Node node : nodes) {
+            System.out.print(node.getID() + " ");
+        }
+        System.out.println();
+
+        // Imprimir a matriz junto com os rótulos dos nós para as linhas
+        for (int i = 0; i < matrix.length; i++) {
+            System.out.print(nodes.get(i).getID() + "   ");
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }    
+
+    /**
+     * Imprime uma representação textual do grafo no console, mostrando os nodos e suas arestas adjacentes.
+     * 
+     * <p>
+     * Teoria dos Grafos:
+     * Essa função fornece uma representação baseada em lista de adjacências do grafo. Cada nó é impresso
+     * junto com uma lista de arestas que saem dele.
+     * </p>
+     * 
+     * <p>
+     * Complexidade do Algoritmo:
+     * O tempo de execução é O(n + e), onde n é o número de vértices e e é o número de arestas.
+     * Isso ocorre porque cada vértice e cada aresta são visitados uma vez.
+     * </p>
+     */
+    public void printGraph() {
+        for (Node node : adjacencyList.keySet()) {
+            List<Edge> edges = adjacencyList.get(node);
+            System.out.println("Node " + node + " has edges: " + edges);
+        }
+    }
 
     private void ensureNodeExistsOrCreated(Node node, boolean create) throws NodeNotFoundException {
         if (!adjacencyList.containsKey(node)) {
@@ -420,29 +533,4 @@ public class Graph {
         }
     }
 
-    public void printAdjacencyMatrix() {
-        int[][] matrix = this.getAdjacencyMatrix();
-        List<Node> nodes = this.getNodesList();
-        System.out.print("    ");
-        for (Node node : nodes) {
-            System.out.print(node.getID() + " ");
-        }
-        System.out.println();
-
-        // Imprimir a matriz junto com os rótulos dos nós para as linhas
-        for (int i = 0; i < matrix.length; i++) {
-            System.out.print(nodes.get(i).getID() + "   ");
-            for (int j = 0; j < matrix[i].length; j++) {
-                System.out.print(matrix[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }    
-
-    public void printGraph() {
-        for (Node node : adjacencyList.keySet()) {
-            List<Edge> edges = adjacencyList.get(node);
-            System.out.println("Node " + node + " has edges: " + edges);
-        }
-    }
 }

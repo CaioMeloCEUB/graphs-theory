@@ -1,3 +1,4 @@
+package exceptions;
 /**
  * Classe para representar uma exceção de nó não encontrado em algoritmos de grafos.
  * <p>
@@ -8,7 +9,7 @@
  *
  * @see Exception
  */
-class NodeNotFoundException extends Exception {
+public class NodeNotFoundException extends Exception {
     /**
      * Construtor que inicializa a exceção com uma mensagem específica.
      *

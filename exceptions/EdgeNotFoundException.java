@@ -1,3 +1,4 @@
+package exceptions;
 
 /**
  * Classe para representar uma exceção de aresta não encontrada em algoritmos de grafos.

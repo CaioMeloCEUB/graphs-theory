@@ -1,3 +1,4 @@
+package exceptions;
 /**
  * Classe para representar uma exceção de aresta duplicada em algoritmos de grafos.
  * <p>
@@ -8,7 +9,7 @@
  *
  * @see Exception
  */
-class DuplicatedEdgeException extends Exception {
+public class DuplicatedEdgeException extends Exception {
     /**
      * Construtor que inicializa a exceção com uma mensagem específica.
      *
