@@ -1,3 +1,4 @@
+package demelo;
 import demelo.graph.Graph;
 import exceptions.DuplicatedEdgeException;
 import exceptions.NodeNotFoundException;
