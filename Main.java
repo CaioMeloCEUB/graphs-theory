@@ -1,28 +1,25 @@
 public class Main {
     
     public static void main(String[] args) {
+    
+      Graph graph = new Graph();
 
-        Node n1 = new Node("CEUB");
-        Node n2 = new Node("Student");
-        Node n3 = new Node("Learning");
-        Node n4 = new Node("Reprovation");
-        Node n5 = new Node("Maybe");
+      // Adicionar Nós
+      graph.addNode("A");
+      graph.addNode("B");
+      graph.addNode("C");
 
-        Edge e1 = new Edge(n1,n2,10);
-        Edge e2 = new Edge(n1,n3,0.1);
-        Edge e3 = new Edge(n1,n4,450);
-        Edge e4 = new Edge(n3,n4,0.2);
-        Edge e5 = new Edge(n3,n5,-3);
-        Edge e6 = new Edge(n2,n4,0);
+      // Adicionar Arestas
+       try {
+            graph.addEdge("A", "B", 4, false);
+            graph.addEdge("A", "C", 5, false);
+            graph.addEdge("B", "C", 1, false);
+        } catch (NodeNotFoundException | DuplicatedEdgeException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
 
-        Graph g = new Graph();
-        g.addEdge(e1);
-        g.addEdge(e2);
-        g.addEdge(e3);
-        g.addEdge(e4);
-        g.addEdge(e5);
-        g.addEdge(e6);
-
-        g.printGraph();
+      // Imprimir Grafo
+      graph.printAdjacencyMatrix();
     }
 }
