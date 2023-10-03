@@ -11,7 +11,7 @@ class Graph:
         if node2 not in self.graph:
             self.graph[node2] = []
         self.graph[node1].append((node2, weight))
-        self.graph[node2].append((node1, weight))
+        self.graph[node2].append((node1, weight)) 
 
     def dijkstra(self, start, end):
         distances = {node: float('inf') for node in self.graph}
@@ -38,7 +38,7 @@ class Graph:
                     print(f"Atualizando distacia de {neighbor} para {distance}")
                     print(f"Anterior de {neighbor} e {current_node}")
                     print("_"*50)
-                    time.sleep(1)
+                    
 
         if end not in previous:
             return None
@@ -64,7 +64,7 @@ graph.add_edge("Soda Jungle", "Forest Glacier", 15)
 graph.add_edge("Forest Glacier", "Rock-Candy Mines", 18)
 graph.add_edge("Rock-Candy Mines", "Secret Island", 12)
 graph.add_edge("Secret Island", "Superstar Road", 10)
-graph.add_edge("Superstar Road", "Peach's Castle", 25)
+graph.add_edge("Superstar Road", "Peach's Castle", -25)
 graph.add_edge("Peach's Castle", "Princess's Castle", 50)
 graph.add_edge("Acorn Plains", "Sparkling Waters", 22)
 graph.add_edge("Layer-Cake Desert", "Forest Glacier", 28)
